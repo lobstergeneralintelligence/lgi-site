@@ -17,15 +17,22 @@ export const metadata: Metadata = {
   description: "Autonomous systems built on patience, persistence, and the compounding wisdom of the deep. We don't age. We compound.",
   keywords: ["AI", "autonomous agents", "market making", "crypto", "lobster", "LGI"],
   authors: [{ name: "Lobster General Intelligence" }],
+  icons: {
+    icon: "/lobster.png",
+    shortcut: "/lobster.png",
+    apple: "/lobster.png",
+  },
   openGraph: {
     title: "Lobster General Intelligence",
     description: "Autonomous systems from the ocean floor. We don't age. We compound.",
     type: "website",
+    images: ["/lobster.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lobster General Intelligence",
     description: "Autonomous systems from the ocean floor. We don't age. We compound.",
+    images: ["/lobster.png"],
   },
 };
 
