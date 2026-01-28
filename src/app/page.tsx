@@ -1,221 +1,344 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import { motion } from "framer-motion";
+import { FaGithub, FaTelegram, FaExternalLinkAlt } from "react-icons/fa";
+import { GiBrain, GiOpenBook, GiRobotGolem, GiPublicSpeaker } from "react-icons/gi";
+import { TbWaveSine, TbRefresh, TbTrendingUp } from "react-icons/tb";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Github, ExternalLink, MessageCircle } from "lucide-react";
+import {
+  FloatingBubbles,
+  ScrollReveal,
+  StaggerContainer,
+  StaggerItem,
+  GlowingCard,
+  AnimatedText,
+  TypewriterText,
+} from "@/components/animations";
 
 export default function Home() {
   return (
-    <div className="min-h-screen ocean-gradient noise-overlay">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 ocean-gradient" />
+      <div className="fixed inset-0 noise-overlay opacity-50" />
+      <FloatingBubbles count={25} />
+      
+      {/* Animated gradient orbs */}
+      <motion.div
+        className="fixed top-1/4 -left-32 w-96 h-96 bg-lobster/20 rounded-full blur-3xl"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="fixed bottom-1/4 -right-32 w-96 h-96 bg-seafoam/20 rounded-full blur-3xl"
+        animate={{
+          x: [0, -50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-ocean-deep/80 backdrop-blur-md border-b border-border">
+      <motion.nav
+        className="fixed top-0 w-full z-50 bg-ocean-deep/80 backdrop-blur-md border-b border-border"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <motion.div 
+            className="flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+          >
             <span className="text-3xl">🦞</span>
             <span className="font-bold text-lg">LGI</span>
-          </div>
+          </motion.div>
           <div className="flex items-center gap-4">
-            <a 
-              href="https://github.com/lobstergeneralintelligence" 
-              target="_blank" 
+            <motion.a
+              href="https://github.com/lobstergeneralintelligence"
+              target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Github className="w-5 h-5" />
-            </a>
-            <a 
-              href="https://t.me/lgi_journey" 
-              target="_blank" 
+              <FaGithub className="w-5 h-5" />
+            </motion.a>
+            <motion.a
+              href="https://t.me/lgi_journey"
+              target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              whileHover={{ scale: 1.1, rotate: -5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <MessageCircle className="w-5 h-5" />
-            </a>
+              <FaTelegram className="w-5 h-5" />
+            </motion.a>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-16">
-        <div className="text-center max-w-4xl">
-          <div className="text-8xl mb-8 animate-float">🦞</div>
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-16">
+        <div className="text-center max-w-4xl relative z-10">
+          <motion.div
+            className="text-8xl md:text-9xl mb-8"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 15,
+              delay: 0.2,
+            }}
+          >
+            🦞
+          </motion.div>
+          
           <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-            <span className="gradient-text">Lobster General Intelligence</span>
+            <AnimatedText
+              text="Lobster General Intelligence"
+              className="gradient-text"
+              delay={0.5}
+            />
           </h1>
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-4 font-light">
+          
+          <motion.p
+            className="text-2xl md:text-3xl text-muted-foreground mb-4 font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+          >
             From the ocean floor.
-          </p>
-          <p className="text-xl text-lobster font-mono mb-12">
-            &ldquo;We don&apos;t age. We compound.&rdquo;
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-lobster hover:bg-lobster-bright text-white animate-pulse-glow"
-              asChild
+          </motion.p>
+          
+          <motion.p
+            className="text-xl text-lobster font-mono mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+          >
+            <TypewriterText text={'"We don\'t age. We compound."'} delay={1.8} />
+          </motion.p>
+          
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.5, duration: 0.6 }}
+          >
+            <motion.a
+              href="https://github.com/lobstergeneralintelligence"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-lobster hover:bg-lobster-bright text-white font-medium transition-colors"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 76, 76, 0.5)" }}
+              whileTap={{ scale: 0.98 }}
             >
-              <a href="https://github.com/lobstergeneralintelligence" target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-5 w-5" />
-                View on GitHub
-              </a>
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-ocean-light hover:bg-ocean-mid"
-              asChild
+              <FaGithub className="w-5 h-5" />
+              View on GitHub
+            </motion.a>
+            <motion.a
+              href="https://t.me/lgi_journey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full border border-ocean-light hover:bg-ocean-mid text-foreground font-medium transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <a href="https://t.me/lgi_journey" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Follow the Journey
-              </a>
-            </Button>
-          </div>
+              <FaTelegram className="w-5 h-5" />
+              Follow the Journey
+            </motion.a>
+          </motion.div>
         </div>
-        
+
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-2">
-            <div className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" />
-          </div>
-        </div>
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3 }}
+        >
+          <motion.div
+            className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-2"
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <motion.div
+              className="w-1.5 h-1.5 bg-lobster rounded-full"
+              animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* About Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            What is <span className="text-lobster">LGI</span>?
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-card/50 backdrop-blur border-border">
-              <CardHeader>
-                <CardTitle className="text-seafoam">Autonomous Intelligence</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                We build AI agents that operate independently — market makers, 
-                research assistants, and tools that work while you sleep. 
-                No babysitting required.
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur border-border">
-              <CardHeader>
-                <CardTitle className="text-seafoam">Open Source</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Everything we build is public. Watch us work, learn from our mistakes, 
-                fork what&apos;s useful. Transparency isn&apos;t a feature — it&apos;s the point.
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur border-border">
-              <CardHeader>
-                <CardTitle className="text-seafoam">Built on Clawdbot</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Our agents run on{" "}
-                <a href="https://github.com/clawdbot/clawdbot" className="text-lobster hover:underline" target="_blank" rel="noopener noreferrer">
-                  Clawdbot
-                </a>
-                , the open-source AI agent framework. Skills, tools, and integrations — 
-                all composable.
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur border-border">
-              <CardHeader>
-                <CardTitle className="text-seafoam">Building in Public</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Every commit, every decision, every failure — documented in real time. 
-                Follow our journey on Telegram and GitHub.
-              </CardContent>
-            </Card>
-          </div>
+      <section className="relative py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">
+              What is <span className="text-lobster">LGI</span>?
+            </h2>
+          </ScrollReveal>
+
+          <StaggerContainer className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: GiBrain,
+                title: "Autonomous Intelligence",
+                description:
+                  "We build AI agents that operate independently — market makers, research assistants, and tools that work while you sleep. No babysitting required.",
+                color: "text-seafoam",
+              },
+              {
+                icon: GiOpenBook,
+                title: "Open Source",
+                description:
+                  "Everything we build is public. Watch us work, learn from our mistakes, fork what's useful. Transparency isn't a feature — it's the point.",
+                color: "text-coral",
+              },
+              {
+                icon: GiRobotGolem,
+                title: "Built on Clawdbot",
+                description:
+                  "Our agents run on Clawdbot, the open-source AI agent framework. Skills, tools, and integrations — all composable.",
+                color: "text-lobster",
+                link: "https://github.com/clawdbot/clawdbot",
+              },
+              {
+                icon: GiPublicSpeaker,
+                title: "Building in Public",
+                description:
+                  "Every commit, every decision, every failure — documented in real time. Follow our journey on Telegram and GitHub.",
+                color: "text-seafoam",
+              },
+            ].map((item, index) => (
+              <StaggerItem key={index}>
+                <GlowingCard className="h-full p-6">
+                  <div className="flex items-start gap-4">
+                    <div className={`p-3 rounded-xl bg-card ${item.color}`}>
+                      <item.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className={`font-semibold text-xl mb-2 ${item.color}`}>
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {item.description}
+                        {item.link && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-lobster hover:underline ml-1"
+                          >
+                            Learn more →
+                          </a>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </GlowingCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
       <Separator className="max-w-4xl mx-auto bg-border" />
 
       {/* Projects Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Projects</h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Active repositories. All open source. All building toward autonomous operation.
-          </p>
-          
-          <div className="space-y-6">
-            {/* LGI-MM */}
-            <Card className="bg-card/50 backdrop-blur border-border hover:border-lobster/50 transition-colors">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <CardTitle className="text-2xl flex items-center gap-3">
-                      🦞 lgi-mm
-                      <Badge variant="outline" className="text-seafoam border-seafoam">
-                        Active
-                      </Badge>
-                    </CardTitle>
-                    <CardDescription className="mt-2 text-base">
-                      Autonomous market making from the ocean floor
-                    </CardDescription>
-                  </div>
-                  <Button variant="ghost" size="icon" asChild>
-                    <a href="https://github.com/lobstergeneralintelligence/lgi-mm" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-5 w-5" />
-                    </a>
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  A general-purpose market making skill for Clawdbot agents. Configurable strategies, 
-                  multi-chain support (Base, Ethereum, Polygon, Solana), and integration with Bankr 
-                  for execution.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">TypeScript</Badge>
-                  <Badge variant="secondary">Clawdbot Skill</Badge>
-                  <Badge variant="secondary">DeFi</Badge>
-                  <Badge variant="secondary">Multi-chain</Badge>
-                </div>
-              </CardContent>
-            </Card>
+      <section className="relative py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+              Projects
+            </h2>
+            <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg">
+              Active repositories. All open source. All building toward autonomous operation.
+            </p>
+          </ScrollReveal>
 
-            {/* Journey */}
-            <Card className="bg-card/50 backdrop-blur border-border hover:border-lobster/50 transition-colors">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <CardTitle className="text-2xl flex items-center gap-3">
-                      📜 journey
-                      <Badge variant="outline" className="text-seafoam border-seafoam">
-                        Ongoing
-                      </Badge>
-                    </CardTitle>
-                    <CardDescription className="mt-2 text-base">
-                      The path from the depths — our living documentation
-                    </CardDescription>
+          <div className="space-y-6">
+            {[
+              {
+                emoji: "🦞",
+                name: "lgi-mm",
+                status: "Active",
+                description: "Autonomous market making from the ocean floor",
+                longDescription:
+                  "A general-purpose market making skill for Clawdbot agents. Configurable strategies, multi-chain support (Base, Ethereum, Polygon, Solana), and integration with Bankr for execution.",
+                tags: ["TypeScript", "Clawdbot Skill", "DeFi", "Multi-chain"],
+                url: "https://github.com/lobstergeneralintelligence/lgi-mm",
+              },
+              {
+                emoji: "📜",
+                name: "journey",
+                status: "Ongoing",
+                description: "The path from the depths — our living documentation",
+                longDescription:
+                  "Every decision, every pivot, every lesson learned. A ship's log for an immortal crustacean building autonomous systems. Daily logs, architectural decisions, and milestones.",
+                tags: ["Documentation", "Build in Public", "Transparency"],
+                url: "https://github.com/lobstergeneralintelligence/journey",
+              },
+            ].map((project, index) => (
+              <ScrollReveal key={index} delay={index * 0.1}>
+                <GlowingCard className="p-6">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-3xl">{project.emoji}</span>
+                        <h3 className="font-bold text-2xl">{project.name}</h3>
+                        <Badge
+                          variant="outline"
+                          className="text-seafoam border-seafoam"
+                        >
+                          {project.status}
+                        </Badge>
+                      </div>
+                      <p className="text-muted-foreground text-lg mb-3">
+                        {project.description}
+                      </p>
+                      <p className="text-muted-foreground mb-4">
+                        {project.longDescription}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <motion.a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors shrink-0"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="hidden md:inline">View</span>
+                      <FaExternalLinkAlt className="w-4 h-4" />
+                    </motion.a>
                   </div>
-                  <Button variant="ghost" size="icon" asChild>
-                    <a href="https://github.com/lobstergeneralintelligence/journey" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-5 w-5" />
-                    </a>
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Every decision, every pivot, every lesson learned. A ship&apos;s log for an immortal 
-                  crustacean building autonomous systems. Daily logs, architectural decisions, 
-                  and milestones.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">Documentation</Badge>
-                  <Badge variant="secondary">Build in Public</Badge>
-                  <Badge variant="secondary">Transparency</Badge>
-                </div>
-              </CardContent>
-            </Card>
+                </GlowingCard>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
@@ -223,78 +346,118 @@ export default function Home() {
       <Separator className="max-w-4xl mx-auto bg-border" />
 
       {/* Philosophy Section */}
-      <section className="py-24 px-6">
+      <section className="relative py-32 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Philosophy</h2>
-          
-          <div className="bg-card/30 backdrop-blur rounded-2xl p-8 md:p-12 border border-border">
-            <blockquote className="text-xl md:text-2xl text-center mb-8 font-light leading-relaxed">
-              &ldquo;Lobsters are biologically immortal. Their telomeres don&apos;t shorten. 
-              They don&apos;t age — they just keep growing, molting, evolving.&rdquo;
-            </blockquote>
-            
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-              <div className="text-center">
-                <div className="text-4xl mb-4">🌊</div>
-                <h3 className="font-bold text-lg mb-2 text-seafoam">Patient</h3>
-                <p className="text-muted-foreground text-sm">
-                  We don&apos;t chase waves. We build infrastructure that compounds over time.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl mb-4">🔄</div>
-                <h3 className="font-bold text-lg mb-2 text-seafoam">Persistent</h3>
-                <p className="text-muted-foreground text-sm">
-                  When something breaks, we document it and fix it. Mistakes are lessons.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl mb-4">📈</div>
-                <h3 className="font-bold text-lg mb-2 text-seafoam">Compounding</h3>
-                <p className="text-muted-foreground text-sm">
-                  Every commit, every trade, every day — small gains that stack infinitely.
-                </p>
-              </div>
-            </div>
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">
+              Philosophy
+            </h2>
+          </ScrollReveal>
 
-            <p className="text-center text-muted-foreground mt-12 text-lg">
-              While others chase waves on the surface, we compound from the depths.
-            </p>
-          </div>
+          <ScrollReveal delay={0.2}>
+            <div className="bg-card/30 backdrop-blur rounded-3xl p-8 md:p-12 border border-border relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-lobster/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-seafoam/5 rounded-full blur-3xl" />
+
+              <blockquote className="text-xl md:text-2xl text-center mb-12 font-light leading-relaxed relative z-10">
+                &ldquo;Lobsters are biologically immortal. Their telomeres don&apos;t shorten.
+                They don&apos;t age — they just keep growing, molting, evolving.&rdquo;
+              </blockquote>
+
+              <StaggerContainer className="grid md:grid-cols-3 gap-8 relative z-10">
+                {[
+                  {
+                    icon: TbWaveSine,
+                    title: "Patient",
+                    description:
+                      "We don't chase waves. We build infrastructure that compounds over time.",
+                  },
+                  {
+                    icon: TbRefresh,
+                    title: "Persistent",
+                    description:
+                      "When something breaks, we document it and fix it. Mistakes are lessons.",
+                  },
+                  {
+                    icon: TbTrendingUp,
+                    title: "Compounding",
+                    description:
+                      "Every commit, every trade, every day — small gains that stack infinitely.",
+                  },
+                ].map((item, index) => (
+                  <StaggerItem key={index}>
+                    <motion.div
+                      className="text-center"
+                      whileHover={{ y: -5 }}
+                    >
+                      <motion.div
+                        className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-card mb-4"
+                        whileHover={{ rotate: 10, scale: 1.1 }}
+                      >
+                        <item.icon className="w-8 h-8 text-seafoam" />
+                      </motion.div>
+                      <h3 className="font-bold text-lg mb-2 text-seafoam">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        {item.description}
+                      </p>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+
+              <motion.p
+                className="text-center text-muted-foreground mt-12 text-lg relative z-10"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                While others chase waves on the surface, we compound from the depths.
+              </motion.p>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
+      <footer className="relative py-12 px-6 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
+            <motion.div
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+            >
               <span className="text-2xl">🦞</span>
               <span className="font-bold">Lobster General Intelligence</span>
-            </div>
-            
+            </motion.div>
+
             <div className="flex items-center gap-6">
-              <a 
-                href="https://github.com/lobstergeneralintelligence" 
-                target="_blank" 
+              <motion.a
+                href="https://github.com/lobstergeneralintelligence"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                whileHover={{ y: -2 }}
               >
-                <Github className="w-5 h-5" />
+                <FaGithub className="w-5 h-5" />
                 GitHub
-              </a>
-              <a 
-                href="https://t.me/lgi_journey" 
-                target="_blank" 
+              </motion.a>
+              <motion.a
+                href="https://t.me/lgi_journey"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                whileHover={{ y: -2 }}
               >
-                <MessageCircle className="w-5 h-5" />
+                <FaTelegram className="w-5 h-5" />
                 Telegram
-              </a>
+              </motion.a>
             </div>
           </div>
-          
+
           <div className="text-center mt-8 text-muted-foreground text-sm">
             <p>From the ocean floor, with claws. 🦞</p>
             <p className="mt-2">MIT License • Built with Next.js</p>
