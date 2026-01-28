@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaTelegram, FaExternalLinkAlt } from "react-icons/fa";
+import { FaXTwitter, FaCopy, FaCheck } from "react-icons/fa6";
 import { GiBrain, GiOpenBook, GiRobotGolem, GiPublicSpeaker } from "react-icons/gi";
 import { TbWaveSine, TbRefresh, TbTrendingUp } from "react-icons/tb";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +18,17 @@ import {
   TypewriterText,
 } from "@/components/animations";
 
+const CONTRACT_ADDRESS = "0x0cfd1cdf700bc0eff5c238454362e3fa8fed9b07";
+
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(CONTRACT_ADDRESS);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated Background */}
@@ -87,6 +99,16 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
             >
               <FaTelegram className="w-5 h-5" />
+            </motion.a>
+            <motion.a
+              href="https://x.com/lgidotgg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaXTwitter className="w-5 h-5" />
             </motion.a>
           </div>
         </div>
@@ -163,6 +185,53 @@ export default function Home() {
               <FaTelegram className="w-5 h-5" />
               Follow the Journey
             </motion.a>
+          </motion.div>
+
+          {/* Token Info */}
+          <motion.div
+            className="mt-12 flex flex-col items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 3, duration: 0.6 }}
+          >
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span>$LGI on Base</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <code className="bg-card/50 backdrop-blur px-4 py-2 rounded-lg text-sm font-mono text-muted-foreground border border-border">
+                {CONTRACT_ADDRESS.slice(0, 6)}...{CONTRACT_ADDRESS.slice(-4)}
+              </code>
+              <motion.button
+                onClick={copyToClipboard}
+                className="p-2 rounded-lg bg-card/50 backdrop-blur border border-border text-muted-foreground hover:text-foreground transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                title="Copy address"
+              >
+                {copied ? <FaCheck className="w-4 h-4 text-seafoam" /> : <FaCopy className="w-4 h-4" />}
+              </motion.button>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <motion.a
+                href="https://dexscreener.com/base/0xb1a6d91173fd0ae099b1caf91f30a33e8974c40cbd076fe889425589e581c428"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-seafoam hover:text-seafoam/80 transition-colors flex items-center gap-1"
+                whileHover={{ y: -2 }}
+              >
+                📊 Chart
+              </motion.a>
+              <motion.a
+                href="https://x.com/lgidotgg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                whileHover={{ y: -2 }}
+              >
+                <FaXTwitter className="w-4 h-4" />
+                @lgidotgg
+              </motion.a>
+            </div>
           </motion.div>
         </div>
 
@@ -464,6 +533,16 @@ export default function Home() {
               >
                 <FaTelegram className="w-5 h-5" />
                 Telegram
+              </motion.a>
+              <motion.a
+                href="https://x.com/lgidotgg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                whileHover={{ y: -2 }}
+              >
+                <FaXTwitter className="w-5 h-5" />
+                X
               </motion.a>
             </div>
           </div>
