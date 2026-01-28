@@ -287,6 +287,16 @@ export default function Home() {
                 url: "https://github.com/lobstergeneralintelligence/lgi-mm",
               },
               {
+                emoji: "🐦",
+                name: "x-api",
+                status: "Released",
+                description: "Post to X (Twitter) via official API — because bird CLI can't write",
+                longDescription:
+                  "The bird CLI is great for reading Twitter, but posting gets blocked by bot detection. This Clawdbot skill uses the official X API with OAuth 1.0a for reliable posting. Requires a paid developer account, but it actually works.",
+                tags: ["TypeScript", "Clawdbot Skill", "X/Twitter", "OAuth 1.0a"],
+                url: "https://github.com/lobstergeneralintelligence/x-api",
+              },
+              {
                 emoji: "📜",
                 name: "journey",
                 status: "Ongoing",
